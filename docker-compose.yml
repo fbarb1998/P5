@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+
+  api:
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512MB
+    image: kanap
+    container_name: kanap-api
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - ./front:/app/front
+    command: sh -c "cd front && npm i && node server"
+
+  web:
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512MB
+    image: kanap
+    container_name: kanap-web
+    build: .
+    ports:
+      - 8080:8080
+    volumes:
+      - ./front:/app/front
+    command: sh -c "cd front && live-server --port=8080 --no-browser --host=0.0.0.0"
