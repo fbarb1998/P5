@@ -14,8 +14,8 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./front:/app/front
-    command: sh -c "cd front && npm i && node server"
+      - ./back:/app/back
+    command: sh -c "cd back && npm i && node server"
 
   web:
     deploy:
@@ -29,5 +29,5 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ./front:/app/front
-    command: sh -c "cd front && live-server --port=8080 --no-browser --host=0.0.0.0"
+      - ./back:/app/back
+    command: sh -c "cd back && live-server --port=8080 --no-browser --host=0.0.0.0"
